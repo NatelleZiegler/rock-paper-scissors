@@ -5,6 +5,8 @@
 </head>
 <body>
   <script>
+	let playerScore;
+	let computerScore;
 	//Function that determines the computers move
 	function computerPlay() {
 		//Use Math.random() to generate random decimal
@@ -32,25 +34,31 @@
 					case "rock":
 						return "Tie! You both chose rock.";
 					case "paper":
+						computerScore++;
 						return "You lose. Paper beats rock.";
 					case "scissors":
+						playerScore++;
 						return "You win! Rock beats scissors.";
 				}
 			case "paper":
 				switch(computerSelection) {
 					case "rock":
+						playerScore++;
 						return "You win! Paper beats rock.";
 					case "paper":
 						return "Tie! You both chose paper.";
 					case "scissors":
+						computerScore++;
 						return "You lose. Scissors beat paper.";
 				case "scissors":
 				}
 			case "scissors":
 				switch(computerSelection) {
 					case "rock":
+						computerScore++;
 						return "You lose. Rock beats scissors.";
 					case "paper":
+						playerScore++;
 						return "You win! Scissors beat paper.";
 					case "scissors":
 						return "Tie! You both chose scissors.";
@@ -59,13 +67,24 @@
 	}
 	//A five round game of RPS that keeps score and reports a winner at the end
 	function game() {
-		let playerScore = 0;
-		let computerScore = 0;
 		let roundNumber = 0;
 		let playerMove, computerMove;
 		while(roundNumber < 5) {
-			playerMove = Window.prompt("Enter your move:", "rock");
-			
+			playerMove = prompt("Enter your move:", "rock");
+			playRound(playerMove, computerPlay());
+			roundNumber++;
+		}
+		console.log("Game over.");
+		console.log("Your score: " + playerScore);
+		console.log("Computer score: " + computerScore);
+		if(playerScore > computerScore) {
+			console.log("You win!");
+		}
+		else if(playerScore < computerScore) {
+			console.log("You lose!");
+		}
+		else {
+			console.log("Game ends in a tie.");
 		}
 	}
   </script>
